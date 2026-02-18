@@ -8,12 +8,12 @@ nU = 4
 
 # ── Default MPPI parameters ──
 DEFAULT_MPPI_PARAMS = dict(
-    num_samples = 200,
-    N           = 150,
-    dt          = 0.02,
+    num_samples = 1000,
+    N           = 30,
+    dt          = 0.1,
     lam         = 10.0,
     nu          = 1000.0,
-    num_iters   = 500,
+    num_iters   = 150,
     base_cov    = np.diag([2.5, 5e-3, 5e-3, 5e-3]),
     Q           = np.diag([2.5, 2.5, 20.0, 1.0, 1.0, 15.0, 0, 0, 0, 0, 0, 0]),
     Qf          = 20.0 * np.diag([2.5, 2.5, 20.0, 1.0, 1.0, 15.0, 0, 0, 0, 0, 0, 0]),

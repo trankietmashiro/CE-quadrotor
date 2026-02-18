@@ -8,16 +8,16 @@ nU = 4
 
 # ── Default CEM parameters ──
 DEFAULT_CEM_PARAMS = dict(
-    num_samples = 200,
-    elite_frac  = 0.3,
-    N           = 150,
-    dt          = 0.02,
+    num_samples = 1000,
+    elite_frac  = 0.1,
+    N           = 50,
+    dt          = 0.1,
     alpha       = 0.2,
     eps_reg     = 1e-6,
     tau_limit   = 5e-3,
     min_var     = 1e-4,
     max_var     = 2.0,
-    num_iters   = 200,
+    num_iters   = 100,
     base_cov    = np.diag([2.5, 5e-3, 5e-3, 5e-3]),
     Q           = np.diag([2.5, 2.5, 20.0, 1.0, 1.0, 15.0, 1, 1, 1, 1, 1, 1]),
     R           = np.diag([0.1, 0.1, 0.1, 0.1]),
