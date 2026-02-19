@@ -49,17 +49,18 @@ def rotation_matrix(phi, theta, psi):
 # ══════════════════════════════════════════════════════════════
 
 def plot_results(xf, uOpt, dt, method_name=""):
-    """Plot x, y, z positions vs time and control inputs."""
+    """Plot x, y, z positions and control inputs vs time."""
     num_steps = xf.shape[1]
-    t = np.arange(num_steps) * dt
+    t_state = np.arange(num_steps) * dt
+    t_ctrl  = np.arange(uOpt.shape[1]) * dt
 
-    # ── Position subplot ──
+    # ── Position plot ──
     fig, axes = plt.subplots(3, 1, figsize=(8, 7), sharex=True)
     labels = ["x", "y", "z"]
     colors = ["#1f77b4", "#ff7f0e", "#2ca02c"]
 
     for i, (ax, lbl, col) in enumerate(zip(axes, labels, colors)):
-        ax.plot(t, xf[i], color=col, linewidth=1.4, label=lbl)
+        ax.plot(t_state, xf[i], color=col, linewidth=1.4, label=lbl)
         ax.axhline(xd[i], color=col, linestyle="--", alpha=0.5,
                    label=f"{lbl}_d = {xd[i]}")
         ax.set_ylabel(f"{lbl} (m)")
@@ -71,6 +72,25 @@ def plot_results(xf, uOpt, dt, method_name=""):
     fig.tight_layout()
     plt.savefig("position_plot.png", dpi=150)
     print("Saved position_plot.png")
+    plt.show()
+
+    # ── Control input plot ──
+    fig2, axes2 = plt.subplots(4, 1, figsize=(8, 8), sharex=True)
+    u_labels = ["Thrust", "τ_x", "τ_y", "τ_z"]
+    u_colors = ["#d62728", "#9467bd", "#8c564b", "#e377c2"]
+    u_units  = ["N", "N·m", "N·m", "N·m"]
+
+    for i, (ax, lbl, col, unit) in enumerate(zip(axes2, u_labels, u_colors, u_units)):
+        ax.plot(t_ctrl, uOpt[i], color=col, linewidth=1.2, label=lbl)
+        ax.set_ylabel(f"{lbl} ({unit})")
+        ax.legend(loc="upper right", fontsize=8)
+        ax.grid(True, alpha=0.3)
+
+    axes2[-1].set_xlabel("Time (s)")
+    fig2.suptitle(f"{method_name} — Control Inputs vs Time", fontsize=13)
+    fig2.tight_layout()
+    plt.savefig("control_plot.png", dpi=150)
+    print("Saved control_plot.png")
     plt.show()
 
 
